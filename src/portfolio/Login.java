@@ -19,19 +19,22 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Toolkit;
 
 public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField usernameInput;
 	private JTextField emailInput;
 	private JTextField passwordInput;
-
 	private static final String DB_URL = "jdbc:mysql://localhost:3306/coursemanagement";
 	private static final String DB_USER = "root";
-	private static final String DB_PASSWORD = "";
+	private static final String DB_PASSWORD = "12345";
 
 	/**
 	 * Launch the application.
@@ -54,11 +57,12 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
-		setTitle("Login");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Meridian\\Desktop\\eclipse-workspace\\CourseManagementSystem\\assests\\logo.png"));
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 367);
+		setBounds(100, 100, 450, 505);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(255, 255, 255));
+		contentPane.setBackground(new Color(221, 221, 221));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -71,112 +75,153 @@ public class Login extends JFrame {
 		userLabel.setBounds(30, 140, 30, 30);
 		contentPane.add(userLabel);
 
-		JLabel usernameLabel = new JLabel("Enter Username:");
-		usernameLabel.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-		usernameLabel.setBounds(70, 140, 130, 30);
-		contentPane.add(usernameLabel);
-
-		usernameInput = new JTextField();
-		usernameInput.setBounds(200, 140, 170, 30);
-		contentPane.add(usernameInput);
-		usernameInput.setColumns(10);
-
-		ImageIcon emailIcon = new ImageIcon("assests\\email.png");
-		ImageIcon scaledEmailIcon = new ImageIcon(emailIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-
-		JLabel emailLabel = new JLabel(scaledEmailIcon);
-		emailLabel.setBounds(30, 180, 30, 30);
-		contentPane.add(emailLabel);
-
 		JLabel emailLabelDesc = new JLabel("Enter Email:");
-		emailLabelDesc.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-		emailLabelDesc.setBounds(70, 180, 130, 30);
+		emailLabelDesc.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+		emailLabelDesc.setBounds(138, 216, 106, 30);
 		contentPane.add(emailLabelDesc);
 
 		emailInput = new JTextField();
+		emailInput.setBackground(UIManager.getColor("FormattedTextField.inactiveBackground"));
 		emailInput.setColumns(10);
-		emailInput.setBounds(200, 180, 170, 30);
+		emailInput.setBounds(138, 240, 170, 30);
+		MatteBorder emailInput_Border = new MatteBorder(0, 0, 1, 0, Color.GRAY);
+		emailInput.setBorder(emailInput_Border);
 		contentPane.add(emailInput);
 
-		ImageIcon passwordIcon = new ImageIcon("assests\\key.jpeg");
-		ImageIcon scaledPasswordIcon = new ImageIcon(
-				passwordIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-
-		JLabel passwordLabel = new JLabel(scaledPasswordIcon);
-		passwordLabel.setBounds(30, 220, 30, 30);
-		contentPane.add(passwordLabel);
-
 		JLabel passwordLabelDesc = new JLabel("Enter Password:");
-		passwordLabelDesc.setFont(new Font("Segoe UI Emoji", Font.BOLD, 14));
-		passwordLabelDesc.setBounds(70, 220, 130, 30);
+		passwordLabelDesc.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+		passwordLabelDesc.setBounds(138, 283, 106, 30);
 		contentPane.add(passwordLabelDesc);
 
 		passwordInput = new JTextField();
+		passwordInput.setBackground(UIManager.getColor("FormattedTextField.inactiveBackground"));
 		passwordInput.setColumns(10);
-		passwordInput.setBounds(200, 220, 170, 30);
+		passwordInput.setBounds(138, 307, 170, 30);
+		MatteBorder passwordInput_Border = new MatteBorder(0, 0, 1, 0, Color.GRAY);
+		passwordInput.setBorder(passwordInput_Border);
 		contentPane.add(passwordInput);
 
-		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        String enteredUsername = usernameInput.getText();
-		        String enteredEmail = emailInput.getText();
-		        String enteredPassword = passwordInput.getText();
-
-		        // Check credentials against the database
-		        if (checkCredentials(enteredUsername, enteredEmail, enteredPassword)) {
-		            // Credentials matched
-		            showPopupMessage("Login successful!");
-
-		            // Close the current login window
-		            dispose();
-
-		            // Open the main window of the course management system dashboard
-		            EventQueue.invokeLater(() -> {
-		                Dashboard mainDashboard = new Dashboard();
-		                mainDashboard.setVisible(true);
-		                mainDashboard.setLocationRelativeTo(null);
-		            });
-		        } else {
-		            // Credentials did not match
-		            showPopupMessage("Credentials did not match.");
-		        }
-		    }
-		});
-
-		btnLogin.setForeground(Color.WHITE);
-		btnLogin.setBackground(new Color(60, 179, 113)); 
-		btnLogin.setFont(new Font("Arial", Font.BOLD, 14));
-		btnLogin.setBounds(120, 280, 150, 40);
-		contentPane.add(btnLogin);
-
 		JLabel welcomeLabel = new JLabel("Welcome to Login Panel");
-		welcomeLabel.setFont(new Font("Consolas", Font.BOLD, 21));
-		welcomeLabel.setBounds(80, 30, 300, 30);
+		welcomeLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 22));
+		welcomeLabel.setBounds(70, 30, 300, 30);
 		contentPane.add(welcomeLabel);
+
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(
+				"C:\\Users\\Meridian\\Desktop\\eclipse-workspace\\CourseManagementSystem\\assests\\icons8-course-96.png"));
+		lblNewLabel_1.setBounds(138, 58, 120, 90);
+		contentPane.add(lblNewLabel_1);
+
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Meridian\\Desktop\\eclipse-workspace\\CourseManagementSystem\\assests\\icons8-email-30.png"));
+		lblNewLabel.setBounds(97, 232, 42, 38);
+		contentPane.add(lblNewLabel);
+
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Meridian\\Desktop\\eclipse-workspace\\CourseManagementSystem\\assests\\icons8-key-30.png"));
+		lblNewLabel_2.setBounds(97, 299, 42, 38);
+		contentPane.add(lblNewLabel_2);
+
+		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Student", "Instructor", "Admin" }));
+		comboBox.setBounds(138, 174, 139, 22);
+		contentPane.add(comboBox);
+
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Meridian\\Desktop\\eclipse-workspace\\CourseManagementSystem\\assests\\icons8-user-30.png"));
+		lblNewLabel_3.setBounds(97, 159, 42, 53);
+		contentPane.add(lblNewLabel_3);
+
+		JButton btnNewButton = new JButton("Login");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String email = emailInput.getText();
+				String password = passwordInput.getText();
+				String userMode = (String) comboBox.getSelectedItem();
+
+				if (checkCredentials(email, password, userMode)) {
+					dispose();
+					openDashboard(userMode);
+					// Credentials match, perform appropriate actions (e.g., navigate to the main
+					// application)
+				} else {
+					// Credentials do not match, show popup message
+					showPopupMessage("Credentials did not match.");
+				}
+			}
+
+			private void openDashboard(String userMode) {
+				Dashboard dashboard = new Dashboard(userMode, null); // Pass user mode to Dashboard
+				dashboard.setVisible(true);
+				dashboard.setLocationRelativeTo(null);
+			}
+		});
+		btnNewButton.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+		btnNewButton.setBounds(161, 365, 89, 23);
+		contentPane.add(btnNewButton);
+
+		JButton btnCreateAccount = new JButton("Create Account");
+		btnCreateAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				openSignUpPage();
+			}
+
+			private void openSignUpPage() {
+				SignUp signUpPage = new SignUp();
+				signUpPage.setVisible(true);
+				signUpPage.setLocationRelativeTo(null);
+			}
+		});
+		btnCreateAccount.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
+		btnCreateAccount.setBounds(138, 432, 139, 23);
+		contentPane.add(btnCreateAccount);
+		
+		JLabel lblNewLabel_4 = new JLabel("Don't have an account?");
+		lblNewLabel_4.setFont(new Font("Sitka Text", Font.ITALIC, 14));
+		lblNewLabel_4.setBounds(138, 414, 170, 14);
+		contentPane.add(lblNewLabel_4);
 	}
+
 	private void showPopupMessage(String message) {
 		JOptionPane.showMessageDialog(this, message);
 	}
 
-	private boolean checkCredentials(String username, String email, String password) {
+	private boolean checkCredentials(String email, String password, String userMode) {
+		String tableName;
+
+		// Determine the table to query based on the selected user mode
+		if ("Student".equals(userMode)) {
+			tableName = "student";
+		} else if ("Instructor".equals(userMode)) {
+			tableName = "teachers";
+		} else if ("Admin".equals(userMode)) {
+			tableName = "admin";
+		} else {
+			System.out.println("Invalid user mode: " + userMode);
+			return false;
+		}
+
 		try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-			String sql = "SELECT * FROM student WHERE username = ? OR email = ? AND password = ?";
+			// Construct the SQL query based on the selected user mode
+			String sql = "SELECT * FROM " + tableName + " WHERE email = ? AND password = ?";
 			try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-				preparedStatement.setString(1, username);
-				preparedStatement.setString(2, email);
-				preparedStatement.setString(3, password);
+				preparedStatement.setString(1, email);
+				preparedStatement.setString(2, password);
 
 				try (ResultSet resultSet = preparedStatement.executeQuery()) {
 					// If the query returns any rows, credentials are valid
-					return resultSet.next();
+					if (resultSet.next()) {
+						// Return true to indicate successful login
+						return true;
+					}
 				}
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+		// Return false to indicate unsuccessful login
 		return false;
 	}
-
-
 }

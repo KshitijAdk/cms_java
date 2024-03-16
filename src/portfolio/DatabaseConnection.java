@@ -11,7 +11,7 @@ public class DatabaseConnection {
 	 */
 	static final String DB_URL = "jdbc:mysql://localhost/coursemanagement";
 	static final String USERNAME = "root";
-	static final String PASSWORD = "";
+	static final String PASSWORD = "12345";
 
 	public static void main(String[] args) {
 
